@@ -19,7 +19,8 @@ let data: { course_name: string; instructor: string; description: string; durati
 
 export async function GET() {
   try {
-    await connectDB("Course1_c++");
+    const databaseName = process.env.DATABASE_NAME || "default_db";
+    await connectDB(databaseName);
     data = await CourseNew.find();
     
     if (!data || data.length === 0) {
