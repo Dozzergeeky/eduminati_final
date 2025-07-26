@@ -14,7 +14,8 @@ const Project = mongoose.models.Advanced || mongoose.model("Advanced", projectSc
 
 export async function GET() {
   try {
-    await connectDB("Course1_c++");
+    const databaseName = process.env.DATABASE_NAME || "default_db";
+    await connectDB(databaseName);
 
     const data = await Project.find();
     
