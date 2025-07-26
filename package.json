@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next build && next export",
+    "deploy:vercel": "vercel --prod",
+    "deploy:railway": "railway up",
+    "docker:build": "docker build -t eduminati-app .",
+    "docker:run": "docker run -p 3000:3000 eduminati-app",
+    "check-env": "node -e \"console.log('Checking environment variables...'); const required = ['DATABASE_URL', 'NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY', 'CLERK_SECRET_KEY', 'GEMINI_API_KEY']; const missing = required.filter(key => !process.env[key]); if (missing.length) { console.error('Missing environment variables:', missing); process.exit(1); } else { console.log('All required environment variables are set!'); }\""
   },
   "dependencies": {
     "@clerk/nextjs": "^6.11.2",
