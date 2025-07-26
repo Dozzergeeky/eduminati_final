@@ -10,7 +10,7 @@ import {
 import { Bell, Mail, MessageSquare } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 const courses = [
@@ -79,11 +79,12 @@ const mentors = [
   },
 ];
 
-export default function CoursesPage() {
-  const { user } = useUser();
+// Component that uses useSearchParams
+function InstructorsContent() {
   const searchParams = useSearchParams();
   const searchCategory = searchParams.get("search") || "";
   const [index, setIndex] = useState(0);
+  
   // Split comma-separated categories
   const categories = searchCategory
     .split(",")
@@ -98,6 +99,43 @@ export default function CoursesPage() {
         )
       )
     : courses;
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold mb-6 dark:text-white">Instructors</h2>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {filteredCourses.map((course) => (
+          <div
+            key={course.id}
+            className="transition-transform hover:scale-[1.02]"
+          >
+            <Card className="overflow-hidden dark:bg-gray-700">
+              <div className="aspect-video relative">
+                <Image
+                  src={course.thumbnail}
+                  alt={course.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <CardHeader className="space-y-2">
+                <div className="inline-flex px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary dark:bg-primary/20">
+                  {course.category}
+                </div>
+                <CardTitle className="line-clamp-2 text-lg dark:text-white">
+                  {course.title}
+                </CardTitle>
+              </CardHeader>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function CoursesPage() {
+  const { user } = useUser();
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-800 pl-10">
@@ -117,37 +155,10 @@ export default function CoursesPage() {
               </Button>
             </div>
 
-            {/* Continue Watching */}
-            <div>
-              <h2 className="text-2xl font-bold mb-6 dark:text-white">Instructors</h2>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {filteredCourses.map((course) => (
-                  <div
-                    key={course.id}
-                    className="transition-transform hover:scale-[1.02]"
-                  >
-                    <Card className="overflow-hidden dark:bg-gray-700">
-                      <div className="aspect-video relative">
-                        <Image
-                          src={course.thumbnail}
-                          alt={course.title}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <CardHeader className="space-y-2">
-                        <div className="inline-flex px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary dark:bg-primary/20">
-                          {course.category}
-                        </div>
-                        <CardTitle className="line-clamp-2 text-lg dark:text-white">
-                          {course.title}
-                        </CardTitle>
-                      </CardHeader>
-                    </Card>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Instructors with Suspense */}
+            <Suspense fallback={<div>Loading instructors...</div>}>
+              <InstructorsContent />
+            </Suspense>
           </div>
         </div>
 

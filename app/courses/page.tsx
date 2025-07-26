@@ -11,7 +11,7 @@ import {
 import { Bell, Mail, MessageSquare } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 const courses = [
@@ -110,11 +110,10 @@ const mentors = [
   },
 ];
 
-export default function CoursesPage() {
-  const { user } = useUser();
+// Component that uses useSearchParams
+function CoursesContent() {
   const searchParams = useSearchParams();
   const searchCategory = searchParams.get("search") || "";
-  const [index, setIndex] = useState(0);
   
   // Split comma-separated categories
   const categories = searchCategory
@@ -132,6 +131,63 @@ export default function CoursesPage() {
     : courses;
 
   return (
+    <div>
+      <h2 className="text-2xl font-bold mb-6">Courses</h2>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {filteredCourses.map((course) => (
+          <Link
+            href={`/courses/${course.id}`}
+            key={course.id}
+            className="transition-transform hover:scale-[1.02]"
+          >
+            <Card className="overflow-hidden dark:bg-gray-700 shadow-lg rounded-lg">
+              <div className="aspect-video relative">
+                <Image
+                  src={course.thumbnail}
+                  alt={course.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <CardHeader className="space-y-2">
+                <div className="inline-flex px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                  {course.category}
+                </div>
+                <CardTitle className="line-clamp-2 text-lg">
+                  {course.title}
+                </CardTitle>
+              </CardHeader>
+              <CardFooter>
+                <div className="flex items-center gap-3">
+                  <Image
+                    src={course.instructor.avatar}
+                    alt={course.instructor.name}
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                  />
+                  <div>
+                    <div className="font-medium">
+                      {course.instructor.name}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      {course.instructor.role}
+                    </div>
+                  </div>
+                </div>
+              </CardFooter>
+            </Card>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function CoursesPage() {
+  const { user } = useUser();
+
+  return (
     <div className="min-h-screen pl-10">
       <div className="flex">
         <div className="flex-1">
@@ -143,63 +199,16 @@ export default function CoursesPage() {
                 <br />
                 Professional Online Courses
               </h1>
-                
+
               <Button variant="secondary" className="mt-4">
                 Join Now
               </Button>
             </div>
 
-            {/* Continue Watching */}
-            <div>
-              <h2 className="text-2xl font-bold mb-6">Courses</h2>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {filteredCourses.map((course) => (
-                  <Link
-                    href={`/courses/${course.id}`}
-                    key={course.id}
-                    className="transition-transform hover:scale-[1.02]"
-                  >
-                    <Card className="overflow-hidden dark:bg-gray-700 shadow-lg rounded-lg">
-                      <div className="aspect-video relative">
-                        <Image
-                          src={course.thumbnail}
-                          alt={course.title}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <CardHeader className="space-y-2">
-                        <div className="inline-flex px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
-                          {course.category}
-                        </div>
-                        <CardTitle className="line-clamp-2 text-lg">
-                          {course.title}
-                        </CardTitle>
-                      </CardHeader>
-                      <CardFooter>
-                        <div className="flex items-center gap-3">
-                          <Image
-                            src={course.instructor.avatar}
-                            alt={course.instructor.name}
-                            width={40}
-                            height={40}
-                            className="rounded-full"
-                          />
-                          <div>
-                            <div className="font-medium">
-                              {course.instructor.name}
-                            </div>
-                            <div className="text-sm text-muted-foreground">
-                              {course.instructor.role}
-                            </div>
-                          </div>
-                        </div>
-                      </CardFooter>
-                    </Card>
-                  </Link>
-                ))}
-              </div>
-            </div>
+            {/* Courses with Suspense */}
+            <Suspense fallback={<div>Loading courses...</div>}>
+              <CoursesContent />
+            </Suspense>
           </div>
         </div>
 
