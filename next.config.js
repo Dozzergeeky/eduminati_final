@@ -12,17 +12,11 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'server', // Change this to 'server'
   eslint: {
     ignoreDuringBuilds: true,
   },
   images: { unoptimized: true },
-  typescript: {
-    ignoreBuildErrors: false,
-  },
-  // Skip prerendering for authentication-related pages
-  async generateBuildId() {
-    return 'eduminati-build-' + Date.now()
-  }
 };
 
 module.exports = nextConfig;

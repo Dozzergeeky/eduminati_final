@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-
+import { useUser } from "@clerk/nextjs";
 import {
   Card,
   CardHeader,
@@ -11,7 +11,7 @@ import { Bell, Mail, MessageSquare } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
+import { useSearchParams } from "next/navigation";
 
 const courses = [
   {
@@ -80,9 +80,9 @@ const mentors = [
 ];
 
 export default function CoursesPage() {
-  
-  
-  const searchCategory = "";
+  const { user } = useUser();
+  const searchParams = useSearchParams();
+  const searchCategory = searchParams.get("search") || "";
   const [index, setIndex] = useState(0);
   // Split comma-separated categories
   const categories = searchCategory
@@ -159,8 +159,8 @@ export default function CoursesPage() {
               <div className="flex flex-col items-center justify-center gap-4 mb-2">
                 <Link href="/profile">
                   <Image
-                    src={"https://ui-avatars.com/api/?name=User"}
-                    alt={"User"}
+                    src={user?.imageUrl || "User"}
+                    alt={user?.fullName || "User"}
                     width={100}
                     height={100}
                     className="rounded-full"
@@ -168,7 +168,7 @@ export default function CoursesPage() {
                 </Link>
                 <div className="text-center">
                   <h2 className="font-semibold text-lg dark:text-white">
-                    Welcome Back {"User"}!
+                    Welcome Back {user?.firstName || "User"}!
                   </h2>
                   <p className="text-sm text-muted-foreground dark:text-slate-400">
                     Continue Your Journey
