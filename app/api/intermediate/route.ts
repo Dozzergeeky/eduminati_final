@@ -14,7 +14,8 @@ const Project = mongoose.models.Intermediate || mongoose.model("Intermediate", p
 
 export async function GET() {
   try {
-    await connectDB("Course1_c++");
+    const databaseName = process.env.DATABASE_NAME || "Course1_c++";
+    await connectDB(databaseName);
 
     const data = await Project.find();
     
