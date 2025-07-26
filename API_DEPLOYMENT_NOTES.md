@@ -22,7 +22,6 @@ All API routes in the `/app/api/` folder have been updated to fix database conne
    - `serverSelectionTimeoutMS: 30000` - Increased timeout for production environments
    - `socketTimeoutMS: 45000` - Longer socket timeout
    - `maxPoolSize: 10` - Connection pooling
-   - `serverSelectionRetryDelayMS: 5000` - Retry logic
    - `heartbeatFrequencyMS: 10000` - Connection health monitoring
 
 4. **Environment Variable Usage**: All files now properly use `process.env.MONGODB_USERNAME` and `process.env.MONGODB_PASSWORD` from the `.env` file.

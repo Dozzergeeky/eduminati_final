@@ -38,7 +38,6 @@ async function connectDB() {
       serverSelectionTimeoutMS: 30000,
       socketTimeoutMS: 45000,
       maxPoolSize: 10,
-      serverSelectionRetryDelayMS: 5000,
       heartbeatFrequencyMS: 10000,
     };
 
