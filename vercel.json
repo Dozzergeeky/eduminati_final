@@ -4,8 +4,8 @@
     "DATABASE_URL": "mongodb+srv://subhrasrimani2002:u3A9LipaovgJrxNJ@cluster.hr3bm.mongodb.net/payment?retryWrites=true&w=majority&appName=Cluster",
     "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_dXNlZnVsLXdvbWJhdC04Ni5jbGVyay5hY2NvdW50cy5kZXYk",
     "CLERK_SECRET_KEY": "sk_test_H6b3OEAjANQazaFxrQYgPo2C9MEnsVpUFyBiLkOJ4n",
-    "MONGODB_USERNAME": "subhrasrimani2002",
-    "MONGODB_PASSWORD": "u3A9LipaovgJrxNJ"
+    "MONGODB_USERNAME": "abhattacharya215",
+    "MONGODB_PASSWORD": "HuNRqnYn7qUxtnHL"
   },
   "functions": {
     "app/api/*/route.ts": {
