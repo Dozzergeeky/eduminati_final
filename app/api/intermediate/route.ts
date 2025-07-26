@@ -14,7 +14,9 @@ const projectSchema = new mongoose.Schema({
 
 const Project = mongoose.models.Intermediate || mongoose.model("Intermediate", projectSchema, "Intermediate");
 
-mongoose.set("debug", true);
+if (process.env.NODE_ENV === "development") {
+  mongoose.set("debug", true);
+}
 
 // Global cache for serverless functions (production-ready for Vercel)
 let cached = (global as any).mongoose;
