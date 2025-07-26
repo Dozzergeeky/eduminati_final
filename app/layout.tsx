@@ -1,16 +1,10 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Chatbot from "@/components/Chatbot";
-import { ClerkProvider } from "@clerk/nextjs";
+import AppClerkProvider from "@/components/AppClerkProvider";
 import TanStackProvider from "@/components/TanStackProvider";
-
-const inter = Inter({ subsets: ["latin"] });
-// The 'poppins' variable is declared but not used in the current code.
-// If it's not needed, consider removing it.
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
   title: "Eduminati - Online Learning Platform",
@@ -24,10 +18,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <ClerkProvider>
-        {/* Changed dark background to a lighter grey */}
-        {/* Apply the 'inter' font class here. If 'poppins' is needed, add it as well e.g., `${inter.className} ${poppins.className}` */}
-        <body className={`${inter.className} dark:bg-gray-800`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link 
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" 
+          rel="stylesheet" 
+        />
+        <link 
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" 
+          rel="stylesheet" 
+        />
+      </head>
+      <AppClerkProvider>
+        <body className="font-sans dark:bg-gray-800">
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
@@ -41,7 +45,7 @@ export default function RootLayout({
           </ThemeProvider>
           <Chatbot />
         </body>
-      </ClerkProvider>
+      </AppClerkProvider>
     </html>
   );
 }
