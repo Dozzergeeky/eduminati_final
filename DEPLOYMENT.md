@@ -12,18 +12,18 @@ The application contains the following hardcoded credentials in main files:
    const GEMINI_API_KEY = "AIzaSyCRasSBtZuUo2D_js8XUZL9p2oIgwzdKLM";
    ```
 
-2. **MongoDB Connection String** (in `lib/mongodb.ts`):
+2. **MongoDB Connection** (embedded in each API route):
    ```javascript
-   const MONGODB_URI = "mongodb+srv://subhrasrimani2002:u3A9LipaovgJrxNJ@cluster.hr3bm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster";
+   const connectionSrt = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.j9gms.mongodb.net/${encodedDbName}?retryWrites=true&w=majority&appName=Cluster0`;
    ```
 
 3. **Environment Variables** (in `.env`):
    ```
    DATABASE_URL="mongodb+srv://subhrasrimani2002:u3A9LipaovgJrxNJ@cluster.hr3bm.mongodb.net/payment?retryWrites=true&w=majority&appName=Cluster"
-   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_test_YWNjZXB0ZWQtc25haWwtODguY2xlcmsuYWNjb3VudHMuZGV2JA"
-   CLERK_SECRET_KEY="sk_test_example_1234567890abcdef"
-   MONGODB_USERNAME="subhrasrimani2002"
-   MONGODB_PASSWORD="u3A9LipaovgJrxNJ"
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_test_dXNlZnVsLXdvbWJhdC04Ni5jbGVyay5hY2NvdW50cy5kZXYk"
+   CLERK_SECRET_KEY="sk_test_H6b3OEAjANQazaFxrQYgPo2C9MEnsVpUFyBiLkOJ4n"
+   MONGODB_USERNAME="abhattacharya215"
+   MONGODB_PASSWORD="HuNRqnYn7qUxtnHL"
    ```
 
 ## Deployment Options
@@ -130,7 +130,8 @@ The application has been configured to build successfully with:
 - ✅ Async params handling for dynamic routes
 - ✅ Suspense boundaries for client-side hooks
 - ✅ Font loading optimizations
-- ✅ MongoDB connection with hardcoded credentials
+- ✅ MongoDB connection with direct embedded connection logic in API routes
+- ✅ Updated API folder with working eduminati database connection
 - ✅ Google Gemini AI integration with hardcoded API key
 
 ## Build Output
