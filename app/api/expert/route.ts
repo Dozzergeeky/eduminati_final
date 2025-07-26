@@ -14,7 +14,8 @@ const Project = mongoose.models.Expert || mongoose.model("Expert", projectSchema
 
 export async function GET() {
   try {
-    await connectDB("Course1_c++");
+    const databaseName = process.env.DATABASE_NAME || "default_database";
+    await connectDB(databaseName);
 
     const data = await Project.find();
     
