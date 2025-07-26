@@ -1,6 +1,13 @@
 # Eduminati - Online Learning Platform
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Dozzergeeky/eduminati_final)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template)
+
 Eduminati is a modern online learning platform built with Next.js, React, and MongoDB. It provides users with access to quality educational content, interactive courses, instructor profiles, and an AI-powered chatbot for instant help.
+
+## 🚀 Quick Deploy
+
+The application is **deployment-ready** with configurations for multiple platforms. See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed instructions.
 
 ## Features
 

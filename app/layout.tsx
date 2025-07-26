@@ -1,9 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
-import Navbar from "@/components/navbar";
+import SimpleNavbar from "@/components/SimpleNavbar";
 import Chatbot from "@/components/Chatbot";
-import AppClerkProvider from "@/components/AppClerkProvider";
 import TanStackProvider from "@/components/TanStackProvider";
 
 export const metadata: Metadata = {
@@ -30,22 +29,20 @@ export default function RootLayout({
           rel="stylesheet" 
         />
       </head>
-      <AppClerkProvider>
-        <body className="font-sans dark:bg-gray-800">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <TanStackProvider>
-              <Navbar />
-              {children}
-            </TanStackProvider>
-          </ThemeProvider>
-          <Chatbot />
-        </body>
-      </AppClerkProvider>
+      <body className="font-sans dark:bg-gray-800">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <TanStackProvider>
+            <SimpleNavbar />
+            {children}
+          </TanStackProvider>
+        </ThemeProvider>
+        <Chatbot />
+      </body>
     </html>
   );
 }

@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
-import { useUser } from "@clerk/nextjs";
+// import { useUser } from "@clerk/nextjs"; // Temporarily commented for deployment
 import {
   Card,
   CardFooter,
@@ -110,8 +110,9 @@ const mentors = [
   },
 ];
 
-export default function CoursesPage() {
-  const { user } = useUser();
+import { Suspense } from "react";
+
+function CoursesContent() {
   const searchParams = useSearchParams();
   const searchCategory = searchParams.get("search") || "";
   const [index, setIndex] = useState(0);
@@ -211,15 +212,15 @@ export default function CoursesPage() {
               <div className="flex flex-col items-center justify-center gap-4 mb-2">
                 <Link href="/profile">
                   <Image
-                    src={user?.imageUrl || "User"}
-                    alt={user?.fullName || "User"}
+                    src={"https://ui-avatars.com/api/?name=User"}
+                    alt={"User"}
                     width={100}
                     height={100}
                     className="rounded-full"
                   />
                 </Link>
                 <div className="text-center">
-                  <h2 className="font-semibold text-lg">Welcome Back {user?.firstName || "User"}!</h2>
+                  <h2 className="font-semibold text-lg">Welcome Back {"User"}!</h2>
                   <p className="text-sm text-muted-foreground">
                     Continue Your Journey
                   </p>
@@ -279,5 +280,13 @@ export default function CoursesPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function CoursesPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading courses...</div>}>
+      <CoursesContent />
+    </Suspense>
   );
 }
