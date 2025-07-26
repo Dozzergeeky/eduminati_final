@@ -12,11 +12,13 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'server', // Change this to 'server'
+  output: 'standalone', // Change to standalone for better deployment compatibility
   eslint: {
     ignoreDuringBuilds: true,
   },
   images: { unoptimized: true },
+  // Add server external packages for better build stability
+  serverExternalPackages: ['mongoose'],
 };
 
 module.exports = nextConfig;
