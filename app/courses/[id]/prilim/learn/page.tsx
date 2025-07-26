@@ -1,8 +1,6 @@
 import { Suspense } from "react";
 import { CourseContent } from "./components/CourseContent";
 
-export const dynamic = 'force-dynamic';
-
 async function getCourseData() {
   let result: any = {};
   try {

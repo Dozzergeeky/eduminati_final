@@ -1,6 +1,6 @@
 "use client";
 
-
+import { useUser, useClerk } from "@clerk/nextjs";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -115,11 +115,11 @@ const weeklyActivity = [
 ];
 
 export default function ProfilePage() {
-  
-  
+  const { user } = useUser();
+  const { openUserProfile } = useClerk();
 
   const handleEditProfile = () => {
-    // openUserProfile(); // Temporarily disabled for deployment
+    openUserProfile();
   };
 
   return (
@@ -132,15 +132,15 @@ export default function ProfilePage() {
             <div className="flex flex-col items-center">
               <div className="relative">
                 <Image
-                  src={"https://ui-avatars.com/api/?name=User"}
-                  alt={"User"} 
+                  src={user?.imageUrl || "User"}
+                  alt={user?.fullName || "User"} 
                   width={100}
                   height={100}
                   className="rounded-full"
                 />
               </div>
-              <h2 className="mt-4 text-xl font-semibold">{"User"}</h2>
-              <p className="text-sm text-muted-foreground dark:text-gray-400">{"User"}</p>
+              <h2 className="mt-4 text-xl font-semibold">{user?.fullName || "User"}</h2>
+              <p className="text-sm text-muted-foreground dark:text-gray-400">{user?.username || "User"}</p>
 
               <Button 
               onClick={handleEditProfile}
