@@ -1,11 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
   "env": {
     "DATABASE_URL": "mongodb+srv://subhrasrimani2002:u3A9LipaovgJrxNJ@cluster.hr3bm.mongodb.net/payment?retryWrites=true&w=majority&appName=Cluster",
     "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_YWNjZXB0ZWQtc25haWwtODguY2xlcmsuYWNjb3VudHMuZGV2JA",
