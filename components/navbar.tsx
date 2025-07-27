@@ -82,14 +82,12 @@ export default function Navbar() {
           <SignedOut>
             <div className="flex gap-4">
               <SignInButton mode="modal">
-                 {/* Adjusted dark mode button styles */}
                 <Button className="bg-gradient-to-r from-indigo-500 to-indigo-700 dark:from-indigo-600 dark:to-indigo-800 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:from-indigo-600 hover:to-indigo-800 dark:hover:from-indigo-700 dark:hover:to-indigo-900 transition-all">
                   Sign In
                 </Button>
               </SignInButton>
 
               <SignUpButton mode="modal">
-                 {/* Adjusted dark mode button styles */}
                 <Button className="bg-white border border-gray-300 dark:bg-gray-700 dark:border-gray-600 text-black dark:text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-slate-50 dark:hover:bg-gray-600 transition-all">
                   Sign Up
                 </Button>

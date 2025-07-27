@@ -21,11 +21,11 @@ This application is configured and ready for deployment with hardcoded API keys 
 ## 🛠 Tech Stack
 
 - **Frontend**: Next.js 15, React 18, TypeScript, Tailwind CSS
-- **Backend**: Next.js API routes, MongoDB (Mongoose)
+- **Backend**: Next.js API routes, Vercel KV (Key-Value storage)
 - **Authentication**: Clerk
 - **AI Integration**: Google Gemini API
 - **UI Components**: Radix UI, Lucide React
-- **Database**: MongoDB Atlas
+- **Data Storage**: Vercel KV (migrated from MongoDB for better performance)
 
 ## 📋 Prerequisites
 

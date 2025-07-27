@@ -50,6 +50,7 @@
     "@types/node": "20.6.2",
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",
+    "@vercel/kv": "^3.0.0",
     "autoprefixer": "10.4.15",
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.0",
@@ -91,6 +92,7 @@
     "@types/react-dom": "19.0.3"
   },
   "devDependencies": {
-    "prisma": "^6.4.1"
+    "prisma": "^6.4.1",
+    "tsx": "^4.20.3"
   }
 }

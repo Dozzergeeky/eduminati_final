@@ -1,50 +1,34 @@
-import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs"; 
 
-const encodedDbName = encodeURIComponent("Course1_c++");
-const connectionSrt = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.j9gms.mongodb.net/${encodedDbName}?retryWrites=true&w=majority&appName=Cluster0`;
-
-const courseSchema = new mongoose.Schema({
-  course_name: { type: String, required: true },
-  instructor: { type: String, required: true },
-  description: { type: String, required: true },
-  duration: { type: String, required: true },
-  sections: { type: [{ type: [{ type: String, required: true }, { type: [String], required: true }], required: true }], required: true },
-  price: { type: Number, required: true }
-});
-
-const CourseNew = mongoose.models.Details || mongoose.model("Details", courseSchema, "Details");
-
-mongoose.set("debug", true);
-
-async function connectDB() {
-  if (mongoose.connection.readyState === 1) {
-    console.log("✅ Already connected to MongoDB.");
-    return;
-  }
-  try {
-    console.log("🚀 Connecting to MongoDB...");
-    await mongoose.connect(connectionSrt);
-    console.log("✅ Successfully connected to MongoDB.");
-  } catch (error) {
-    console.error("❌ MongoDB connection error:", error);
-    throw new Error(`Database connection failed: ${error instanceof Error ? error.message : String(error)}`);
-  }
-}
-
-let data: { course_name: string; instructor: string; description: string; duration: string; sections: { type: string; content: string[] }[], price: Number }[] = [];
+// Hardcoded course data - no external dependencies
+const courseData = {
+  "result": [
+    {
+      "_id": "67eea2e9a5aa378af28b1e4c",
+      "course_name": "Mastering C++: From Beginner to Advanced",
+      "course_instructor": "Subhajit Srimani",
+      "course_description": "This comprehensive C++ course is designed for both beginners and experienced programmers. You'll start with the basics of C++ syntax and gradually move to advanced topics. By the end of this course, you'll be able to build efficient and scalable applications, solve complex problems, and ace technical interviews. Hands-on projects and real-world examples are included to solidify your understanding.",
+      "course_duration": "12 weeks (Approx. 6-8 hours per week)",
+      "Price": 1000,
+      "course_sections": [
+        ["Introduction to C++", "2h 30m", "4", ["Introduction to Programming", "Setting up the Development Environment", "Writing Your First C++ Program", "Understanding Variables and Data Types"]],
+        ["Basic C++ Concepts", "3h 15m", "5", ["Operators and Expressions", "Input and Output Streams", "Control Structures: If-Else", "Loops: For and While", "Functions and Scope"]],
+        ["Object-Oriented Programming", "4h 00m", "6", ["Classes and Objects", "Constructors and Destructors", "Inheritance and Polymorphism", "Encapsulation and Abstraction", "Virtual Functions", "Operator Overloading"]],
+        ["Advanced Data Structures", "3h 45m", "5", ["Arrays and Pointers", "Dynamic Memory Allocation", "Linked Lists", "Stacks and Queues", "Trees and Graphs"]],
+        ["STL and Templates", "2h 50m", "4", ["Introduction to STL", "Vectors and Lists", "Maps and Sets", "Template Programming"]],
+        ["File Handling and Exceptions", "2h 20m", "3", ["File Input/Output Operations", "Exception Handling", "Error Management"]],
+        ["Project Development", "3h 00m", "4", ["Project Planning", "Building a Complete Application", "Code Optimization", "Final Project Presentation"]]
+      ]
+    }
+  ]
+};
 
 export async function GET() {
   try {
-    await connectDB();
-    data = await CourseNew.find();
-    
-    if (!data || data.length === 0) {
-      return NextResponse.json({ result: "No data found" }, { status: 404 });
-    }
-    return NextResponse.json({ result: data });
+    console.log("✅ Successfully loaded hardcoded course data.");
+    return NextResponse.json(courseData);
   } 
   catch (error) {
     console.error("Error in GET route:", error);

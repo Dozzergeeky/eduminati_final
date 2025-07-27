@@ -1,6 +1,6 @@
 "use client";
 
-import { useUser, useClerk } from "@clerk/nextjs";
+// import { useUser, useClerk } from "@clerk/nextjs"; // Temporarily disabled for testing
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -115,11 +115,19 @@ const weeklyActivity = [
 ];
 
 export default function ProfilePage() {
-  const { user } = useUser();
-  const { openUserProfile } = useClerk();
+  // const { user } = useUser(); // Temporarily disabled for testing
+  // const { openUserProfile } = useClerk(); // Temporarily disabled for testing
+
+  // Mock user data for testing
+  const user = {
+    imageUrl: "https://ui-avatars.com/api/?name=Test+User&background=random",
+    fullName: "Test User",
+    username: "testuser"
+  };
 
   const handleEditProfile = () => {
-    openUserProfile();
+    // openUserProfile(); // Temporarily disabled for testing
+    alert("Edit profile functionality temporarily disabled for testing");
   };
 
   return (
