@@ -1,10 +1,8 @@
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
+import { buildConnectionString } from "@/lib/db-config";
 
 export const runtime = "nodejs"; 
-
-const encodedDbName = encodeURIComponent("Course1_c++");
-const connectionSrt = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.j9gms.mongodb.net/${encodedDbName}?retryWrites=true&w=majority&appName=Cluster0`;
 
 const courseSchema = new mongoose.Schema({
   course_name: { type: String, required: true },
@@ -26,6 +24,7 @@ async function connectDB() {
   }
   try {
     console.log("🚀 Connecting to MongoDB...");
+    const connectionSrt = buildConnectionString("Course1_c++");
     await mongoose.connect(connectionSrt);
     console.log("✅ Successfully connected to MongoDB.");
   } catch (error) {

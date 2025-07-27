@@ -1,7 +1,14 @@
 import mongoose from "mongoose";
 
-// Hardcoded MongoDB connection string (as requested to keep API keys in main files)
-const MONGODB_URI = "mongodb+srv://subhrasrimani2002:u3A9LipaovgJrxNJ@cluster.hr3bm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster";
+// MongoDB connection using environment variables
+const MONGODB_USERNAME = process.env.MONGODB_USERNAME;
+const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD;
+const MONGODB_CLUSTER = process.env.MONGODB_CLUSTER || "cluster0.j9gms.mongodb.net";
+const MONGODB_APP_NAME = process.env.MONGODB_APP_NAME || "Cluster0";
+
+// Fallback to DATABASE_URL if individual credentials not available
+const MONGODB_URI = process.env.DATABASE_URL || 
+  `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@${MONGODB_CLUSTER}/?retryWrites=true&w=majority&appName=${MONGODB_APP_NAME}`;
 
 // Global is used here to maintain a cached connection across hot reloads
 // in development. This prevents connections growing exponentially
@@ -22,15 +29,22 @@ async function connectDB(dbName?: string) {
     return cached.conn;
   }
 
+  if (!MONGODB_URI) {
+    throw new Error("❌ MongoDB connection string not found in environment variables");
+  }
+
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
     };
 
     // Use specific database name if provided
-    const connectionString = dbName 
-      ? MONGODB_URI.replace("/?retryWrites", `/${encodeURIComponent(dbName)}?retryWrites`)
-      : MONGODB_URI;
+    let connectionString = MONGODB_URI;
+    if (dbName) {
+      // Extract base URL without database name
+      const baseUrl = connectionString.replace(/\/[^?]*\?/, "/?");
+      connectionString = baseUrl.replace("/?", `/${encodeURIComponent(dbName)}?`);
+    }
 
     console.log("🚀 Connecting to MongoDB...");
     cached.promise = mongoose.connect(connectionString, opts).then((mongoose) => {
