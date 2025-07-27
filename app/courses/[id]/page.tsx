@@ -75,8 +75,11 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ i
   let courseData: CourseData;
   
   try {
-    // Use environment variable for base URL or fallback
-    const baseUrl = process.env.NEXTAUTH_URL || process.env.VERCEL_URL || 'http://localhost:3000';
+    // Use relative URL for server-side requests in production
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}`
+      : process.env.NEXTAUTH_URL || 'http://localhost:3000';
+    
     const response = await fetch(`${baseUrl}/api/courseData`, { 
       cache: 'no-store',
       headers: {
