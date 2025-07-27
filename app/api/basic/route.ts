@@ -1,19 +1,16 @@
 import { NextResponse } from "next/server";
-import path from "path";
-import { promises as fs } from "fs";
+import { KVService, DATA_KEYS } from "@/lib/kv-service";
 
 export const runtime = "nodejs"; 
 
 export async function GET() {
   try {
-    // Read data from JSON file instead of MongoDB
-    const jsonDirectory = path.join(process.cwd(), 'data');
-    const fileContents = await fs.readFile(jsonDirectory + '/basic.json', 'utf8');
-    const data = JSON.parse(fileContents);
+    // Get data from Vercel KV instead of JSON file
+    const data = await KVService.get(DATA_KEYS.BASIC);
     
-    console.log("✅ Successfully loaded basic quiz data from JSON file.");
+    console.log("✅ Successfully loaded basic quiz data from Vercel KV.");
     
-    if (!data.result || data.result.length === 0) {
+    if (!data || !data.result || data.result.length === 0) {
       return NextResponse.json({ result: "No data found" }, { status: 404 });
     }
 
