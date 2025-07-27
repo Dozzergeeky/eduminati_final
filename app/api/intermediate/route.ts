@@ -1,46 +1,23 @@
-import mongoose from "mongoose";
 import { NextResponse } from "next/server";
-import { buildConnectionString } from "@/lib/db-config";
+import path from "path";
+import { promises as fs } from "fs";
 
 export const runtime = "nodejs"; 
 
-const projectSchema = new mongoose.Schema({
-  question: { type: String, required: true },
-  options: { type: [String], required: true }, 
-  answer: { type: String, required: true },
-});
-
-const Project = mongoose.models.Intermediate || mongoose.model("Intermediate", projectSchema, "Intermediate");
-
-mongoose.set("debug", true);
-
-async function connectDB() {
-  if (mongoose.connection.readyState === 1) {
-    console.log("✅ Already connected to MongoDB.");
-    return;
-  }
-  try {
-    console.log("🚀 Connecting to MongoDB...");
-    const connectionSrt = buildConnectionString("Course1_c++");
-    await mongoose.connect(connectionSrt);
-    console.log("✅ Successfully connected to MongoDB.");
-  } catch (error) {
-    console.error("❌ MongoDB connection error:", error);
-    throw new Error(`Database connection failed: ${error instanceof Error ? error.message : String(error)}`);
-  }
-}
-
 export async function GET() {
   try {
-    await connectDB();
-
-    const data = await Project.find();
+    // Read data from JSON file instead of MongoDB
+    const jsonDirectory = path.join(process.cwd(), 'data');
+    const fileContents = await fs.readFile(jsonDirectory + '/intermediate.json', 'utf8');
+    const data = JSON.parse(fileContents);
     
-    if (!data || data.length === 0) {
+    console.log("✅ Successfully loaded intermediate quiz data from JSON file.");
+    
+    if (!data.result || data.result.length === 0) {
       return NextResponse.json({ result: "No data found" }, { status: 404 });
     }
 
-    return NextResponse.json({ result: data });
+    return NextResponse.json({ result: data.result });
   } catch (error) {
     console.error("Error in GET route:", error);
     return NextResponse.json({ 

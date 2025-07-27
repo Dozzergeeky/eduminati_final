@@ -1,0 +1,260 @@
+{
+  "result": [
+    {
+      "options": [],
+      "_id": "68049c268731c5a36688607f",
+      "questions": [
+        [
+          "What does the virtual keyword do in C++?",
+          [
+            "It allows functions to be called from base class objects",
+            "It forces a function to be called from the derived class",
+            "It allows dynamic dispatch to be used when calling a function",
+            "It prevents a function from being overridden"
+          ],
+          "2"
+        ],
+        [
+          "In C++, which operator is used for memory allocation of arrays?",
+          [
+            "malloc()",
+            "new[]",
+            "new",
+            "calloc()"
+          ],
+          "1"
+        ],
+        [
+          "Which of the following is the correct declaration of a move constructor?",
+          [
+            "Class(Class&& obj);",
+            "Class(Class obj);",
+            "void Class(Class&& obj);",
+            "void Class(Class obj);"
+          ],
+          "0"
+        ],
+        [
+          "What is the purpose of std::unique_ptr in C++?",
+          [
+            "To manage memory shared across multiple owners",
+            "To prevent copying and assign ownership of an object to only one pointer",
+            "To create weak references for an object",
+            "To allow shared access to an object in a multi-threaded environment"
+          ],
+          "1"
+        ],
+        [
+          "What does the following C++ code do? int arr[] = {1, 2, 3}; int* ptr = std::move(arr);",
+          [
+            "Copies the elements of the array to ptr",
+            "Moves the elements of the array to ptr",
+            "Causes undefined behavior",
+            "Returns the address of the array"
+          ],
+          "2"
+        ],
+        [
+          "In C++11, which feature allows transferring ownership of a resource from one object to another without copying?",
+          [
+            "Move constructor",
+            "Deep copy constructor",
+            "Copy assignment operator",
+            "Destructor"
+          ],
+          "0"
+        ],
+        [
+          "What is the main benefit of std::shared_ptr over raw pointers in C++?",
+          [
+            "It automatically deallocates the memory when no longer needed",
+            "It is faster than raw pointers",
+            "It provides more control over memory management",
+            "It prevents memory leaks entirely"
+          ],
+          "0"
+        ],
+        [
+          "Which of the following correctly initializes an array of 5 integers in C++?",
+          [
+            "int arr[] = {1, 2, 3, 4, 5};",
+            "int arr[5] = {1, 2, 3, 4};",
+            "int arr(5) = {1, 2, 3, 4, 5};",
+            "int arr[] = new int[5];"
+          ],
+          "0"
+        ],
+        [
+          "Which of the following statements about std::map is false?",
+          [
+            "It stores key-value pairs in sorted order",
+            "It allows duplicate keys",
+            "It provides O(log n) time complexity for lookups",
+            "It is implemented as a balanced binary tree"
+          ],
+          "1"
+        ],
+        [
+          "What is the purpose of std::atomic in C++?",
+          [
+            "To synchronize access to shared memory in multithreading",
+            "To store memory safely across threads without locking",
+            "To avoid race conditions when accessing global variables",
+            "To create objects that cannot be copied"
+          ],
+          "1"
+        ],
+        [
+          "Which keyword is used to declare a variable as constexpr in C++?",
+          [
+            "const",
+            "static",
+            "constexpr",
+            "final"
+          ],
+          "2"
+        ],
+        [
+          "What does std::lock_guard do in C++?",
+          [
+            "It provides a mechanism to prevent deadlocks",
+            "It ensures the correct sequence of multithreading operations",
+            "It provides scoped locking for mutual exclusion on a mutex",
+            "It locks the memory during execution"
+          ],
+          "0"
+        ],
+        [
+          "Which of the following is true about the delete operator in C++?",
+          [
+            "It deallocates memory but does not call the destructor",
+            "It calls the destructor and deallocates memory",
+            "It only deallocates memory",
+            "It frees memory from the stack"
+          ],
+          "1"
+        ],
+        [
+          "How can you handle the case of a null pointer dereference in C++?",
+          [
+            "By using nullptr",
+            "By checking before dereferencing",
+            "By using std::shared_ptr",
+            "By using std::unique_ptr"
+          ],
+          "1"
+        ],
+        [
+          "What is the purpose of std::move in C++?",
+          [
+            "To convert an lvalue to an rvalue",
+            "To convert an rvalue to an lvalue",
+            "To create a copy of an object",
+            "To perform a shallow copy"
+          ],
+          "0"
+        ],
+        [
+          "Which of the following C++ functions can be used to copy an object?",
+          [
+            "std::copy()",
+            "std::move()",
+            "std::clone()",
+            "std::assign()"
+          ],
+          "0"
+        ],
+        [
+          "What is the role of a friend function in C++?",
+          [
+            "To make functions accessible within the class",
+            "To allow a function outside the class to access private members",
+            "To manage memory for a class",
+            "To make a function static"
+          ],
+          "1"
+        ],
+        [
+          "How do you handle memory allocation failure in C++?",
+          [
+            "By checking if the returned pointer is nullptr",
+            "By using throw to raise an exception",
+            "By using std::out_of_memory",
+            "By using a try-catch block for dynamic memory allocation"
+          ],
+          "0"
+        ],
+        [
+          "What is the purpose of std::tuple in C++?",
+          [
+            "To store a collection of elements of the same type",
+            "To store a collection of elements of different types",
+            "To represent a dynamic array",
+            "To create a string-like structure"
+          ],
+          "1"
+        ],
+        [
+          "Which of the following will cause a compilation error in C++?",
+          [
+            "int arr[] = {1, 2, 3};",
+            "int* ptr = nullptr;",
+            "int x = \"Hello\";",
+            "float y = 10.5f;"
+          ],
+          "2"
+        ],
+        [
+          "How do you define a thread-safe function in C++?",
+          [
+            "By using std::lock to synchronize access",
+            "By declaring the function static",
+            "By using std::mutex for synchronization",
+            "By using std::thread to call the function"
+          ],
+          "2"
+        ],
+        [
+          "Which operator in C++ is used for type casting from one pointer type to another?",
+          [
+            "dynamic_cast",
+            "static_cast",
+            "reinterpret_cast",
+            "const_cast"
+          ],
+          "2"
+        ],
+        [
+          "In C++, which keyword is used to prevent a class from being instantiated?",
+          [
+            "private",
+            "abstract",
+            "static",
+            "virtual"
+          ],
+          "1"
+        ],
+        [
+          "What is the correct syntax for defining a virtual destructor in C++?",
+          [
+            "virtual void ~Class();",
+            "~Class() virtual;",
+            "virtual ~Class();",
+            "void virtual ~Class();"
+          ],
+          "2"
+        ],
+        [
+          "What does the std::pair class do in C++?",
+          [
+            "Stores two values of different types as a single object",
+            "Stores two values of the same type",
+            "Represents a dynamically allocated array",
+            "Handles multiple types of objects"
+          ],
+          "0"
+        ]
+      ]
+    }
+  ]
+}

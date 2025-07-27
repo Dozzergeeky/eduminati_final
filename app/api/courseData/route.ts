@@ -1,49 +1,22 @@
-import mongoose from "mongoose";
 import { NextResponse } from "next/server";
-import { buildConnectionString } from "@/lib/db-config";
+import path from "path";
+import { promises as fs } from "fs";
 
 export const runtime = "nodejs"; 
 
-const courseSchema = new mongoose.Schema({
-  course_name: { type: String, required: true },
-  course_instructor: { type: String, required: true },
-  course_description: { type: String, required: true },
-  course_duration: { type: String, required: true },
-  course_sections: { type: [{ type: [{ type: String, required: true }, { type: [String], required: true }], required: true }], required: true },
-  Price: { type: Number, required: true }
-});
-
-const CourseNew = mongoose.models.Details || mongoose.model("Details", courseSchema, "Details");
-
-mongoose.set("debug", true);
-
-async function connectDB() {
-  if (mongoose.connection.readyState === 1) {
-    console.log("✅ Already connected to MongoDB.");
-    return;
-  }
-  try {
-    console.log("🚀 Connecting to MongoDB...");
-    const connectionSrt = buildConnectionString("Course1_c++");
-    await mongoose.connect(connectionSrt);
-    console.log("✅ Successfully connected to MongoDB.");
-  } catch (error) {
-    console.error("❌ MongoDB connection error:", error);
-    throw new Error(`Database connection failed: ${error instanceof Error ? error.message : String(error)}`);
-  }
-}
-
-let data: { course_name: string; instructor: string; description: string; duration: string; sections: { type: string; content: string[] }[], price: Number }[] = [];
-
 export async function GET() {
   try {
-    await connectDB();
-    data = await CourseNew.find();
+    // Read data from JSON file instead of MongoDB
+    const jsonDirectory = path.join(process.cwd(), 'data');
+    const fileContents = await fs.readFile(jsonDirectory + '/courseData.json', 'utf8');
+    const data = JSON.parse(fileContents);
     
-    if (!data || data.length === 0) {
+    console.log("✅ Successfully loaded course data from JSON file.");
+    
+    if (!data.result || data.result.length === 0) {
       return NextResponse.json({ result: "No data found" }, { status: 404 });
     }
-    return NextResponse.json({ result: data });
+    return NextResponse.json({ result: data.result });
   } 
   catch (error) {
     console.error("Error in GET route:", error);
