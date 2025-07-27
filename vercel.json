@@ -1,15 +1,8 @@
 {
   "version": 2,
   "env": {
-    "DATABASE_URL": "mongodb+srv://abhattacharya215:HuNRqnYn7qUxtnHL@cluster0.j9gms.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
     "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_dXNlZnVsLXdvbWJhdC04Ni5jbGVyay5hY2NvdW50cy5kZXYk",
-    "CLERK_SECRET_KEY": "sk_test_H6b3OEAjANQazaFxrQYgPo2C9MEnsVpUFyBiLkOJ4n",
-    "MONGODB_USERNAME": "abhattacharya215",
-    "MONGODB_PASSWORD": "HuNRqnYn7qUxtnHL",
-    "MONGODB_CLUSTER": "cluster0.j9gms.mongodb.net",
-    "MONGODB_APP_NAME": "Cluster0",
-    "KV_REST_API_URL": "@kv_rest_api_url",
-    "KV_REST_API_TOKEN": "@kv_rest_api_token"
+    "CLERK_SECRET_KEY": "sk_test_H6b3OEAjANQazaFxrQYgPo2C9MEnsVpUFyBiLkOJ4n"
   },
   "functions": {
     "app/api/*/route.ts": {
