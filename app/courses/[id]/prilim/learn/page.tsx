@@ -7,12 +7,26 @@ export const dynamic = 'force-dynamic'
 async function getCourseData() {
   let result: any = {};
   try {
-    // Use relative URL for server-side requests in production
-    const baseUrl = process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}`
-      : process.env.NEXTAUTH_URL || 'http://localhost:3000';
+    // For server-side requests, use relative URLs in production
+    let apiUrl: string;
     
-    const response = await fetch(`${baseUrl}/api/courseData`, {
+    if (typeof window === 'undefined') {
+      // Server-side: Check if we're in Vercel production
+      if (process.env.VERCEL_URL) {
+        apiUrl = `https://${process.env.VERCEL_URL}/api/courseData`;
+      } else if (process.env.NODE_ENV === 'production') {
+        // Fallback for production
+        apiUrl = `https://eduminati-final.vercel.app/api/courseData`;
+      } else {
+        // Local development
+        apiUrl = 'http://localhost:3000/api/courseData';
+      }
+    } else {
+      // Client-side: use relative URL
+      apiUrl = '/api/courseData';
+    }
+    
+    const response = await fetch(apiUrl, {
       headers: {
         'User-Agent': 'NextJS'
       }

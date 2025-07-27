@@ -6,11 +6,11 @@ export const runtime = "nodejs";
 
 const courseSchema = new mongoose.Schema({
   course_name: { type: String, required: true },
-  instructor: { type: String, required: true },
-  description: { type: String, required: true },
-  duration: { type: String, required: true },
-  sections: { type: [{ type: [{ type: String, required: true }, { type: [String], required: true }], required: true }], required: true },
-  price: { type: Number, required: true }
+  course_instructor: { type: String, required: true },
+  course_description: { type: String, required: true },
+  course_duration: { type: String, required: true },
+  course_sections: { type: [{ type: [{ type: String, required: true }, { type: [String], required: true }], required: true }], required: true },
+  Price: { type: Number, required: true }
 });
 
 const CourseNew = mongoose.models.Details || mongoose.model("Details", courseSchema, "Details");
