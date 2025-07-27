@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export const runtime = "nodejs"; 
 
 const encodedDbName = encodeURIComponent("Course1_c++");
-const connectionSrt = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster.hr3bm.mongodb.net/${encodedDbName}?retryWrites=true&w=majority&appName=Cluster`;
+const connectionSrt = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.j9gms.mongodb.net/${encodedDbName}?retryWrites=true&w=majority&appName=Cluster0`;
 
 const projectSchema = new mongoose.Schema({
   question: { type: String, required: true },
