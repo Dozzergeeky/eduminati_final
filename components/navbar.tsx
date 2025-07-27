@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Search, Sun, Moon } from "lucide-react";
-import {
-  SignedIn,
-  UserButton,
-  SignedOut,
-  SignInButton,
-  SignUpButton,
-} from "@clerk/nextjs";
+// Temporarily disabled for testing
+// import {
+//   SignedIn,
+//   UserButton,
+//   SignedOut,
+//   SignInButton,
+//   SignUpButton,
+// } from "@clerk/nextjs";
 //import the aboutRef from the root page
 import Home from "@/app/page";
 
@@ -79,17 +80,26 @@ export default function Navbar() {
             )}
           </button>
 
+          {/* Temporarily showing simple buttons instead of Clerk authentication */}
+          <div className="flex gap-4">
+            <Button className="bg-gradient-to-r from-indigo-500 to-indigo-700 dark:from-indigo-600 dark:to-indigo-800 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:from-indigo-600 hover:to-indigo-800 dark:hover:from-indigo-700 dark:hover:to-indigo-900 transition-all">
+              Sign In (Testing)
+            </Button>
+            <Button className="bg-white border border-gray-300 dark:bg-gray-700 dark:border-gray-600 text-black dark:text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-slate-50 dark:hover:bg-gray-600 transition-all">
+              Sign Up (Testing)
+            </Button>
+          </div>
+
+          {/* Clerk authentication temporarily disabled for testing
           <SignedOut>
             <div className="flex gap-4">
               <SignInButton mode="modal">
-                 {/* Adjusted dark mode button styles */}
                 <Button className="bg-gradient-to-r from-indigo-500 to-indigo-700 dark:from-indigo-600 dark:to-indigo-800 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:from-indigo-600 hover:to-indigo-800 dark:hover:from-indigo-700 dark:hover:to-indigo-900 transition-all">
                   Sign In
                 </Button>
               </SignInButton>
 
               <SignUpButton mode="modal">
-                 {/* Adjusted dark mode button styles */}
                 <Button className="bg-white border border-gray-300 dark:bg-gray-700 dark:border-gray-600 text-black dark:text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-slate-50 dark:hover:bg-gray-600 transition-all">
                   Sign Up
                 </Button>
@@ -100,6 +110,7 @@ export default function Navbar() {
           <SignedIn>
             <UserButton afterSignOutUrl="/" />
           </SignedIn>
+          */}
         </div>
       </div>
     </nav>

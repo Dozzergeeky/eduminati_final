@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useUser } from "@clerk/nextjs";
+// import { useUser } from "@clerk/nextjs"; // Temporarily disabled for testing
 import {
   Card,
   CardHeader,
@@ -135,7 +135,14 @@ function InstructorsContent() {
 }
 
 export default function CoursesPage() {
-  const { user } = useUser();
+  // const { user } = useUser(); // Temporarily disabled for testing
+  
+  // Mock user data for testing
+  const user = {
+    imageUrl: "https://ui-avatars.com/api/?name=Test+User&background=random",
+    fullName: "Test User",
+    firstName: "Test"
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-800 pl-10">
