@@ -11,18 +11,31 @@ import {
   SignInButton,
   SignUpButton,
 } from "@clerk/nextjs";
-//import the aboutRef from the root page
-import Home from "@/app/page";
+
 
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
+  const [clerkLoaded, setClerkLoaded] = useState(false);
 
   useEffect(() => {
     // Check initial theme preference from ThemeProvider (if possible) or system/localStorage
     const isDark = document.documentElement.classList.contains('dark');
     setDarkMode(isDark);
+    
+    // Check if Clerk has loaded
+    const checkClerkLoaded = () => {
+      setClerkLoaded((window as any).Clerk !== undefined);
+    };
+    
+    // Check immediately
+    checkClerkLoaded();
+    
+    // Check again after a delay in case Clerk is still loading
+    const timeout = setTimeout(checkClerkLoaded, 2000);
+    
+    return () => clearTimeout(timeout);
   }, []);
 
 
@@ -79,25 +92,44 @@ export default function Navbar() {
             )}
           </button>
 
-          <SignedOut>
+          {clerkLoaded ? (
+            <>
+              <SignedOut>
+                <div className="flex gap-4">
+                  <SignInButton mode="modal">
+                    <Button className="bg-gradient-to-r from-indigo-500 to-indigo-700 dark:from-indigo-600 dark:to-indigo-800 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:from-indigo-600 hover:to-indigo-800 dark:hover:from-indigo-700 dark:hover:to-indigo-900 transition-all">
+                      Sign In
+                    </Button>
+                  </SignInButton>
+
+                  <SignUpButton mode="modal">
+                    <Button className="bg-white border border-gray-300 dark:bg-gray-700 dark:border-gray-600 text-black dark:text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-slate-50 dark:hover:bg-gray-600 transition-all">
+                      Sign Up
+                    </Button>
+                  </SignUpButton>
+                </div>
+              </SignedOut>
+
+              <SignedIn>
+                <UserButton afterSignOutUrl="/" />
+              </SignedIn>
+            </>
+          ) : (
+            // Fallback buttons when Clerk is not loaded
             <div className="flex gap-4">
-              <SignInButton mode="modal">
+              <Link href="/sign-in">
                 <Button className="bg-gradient-to-r from-indigo-500 to-indigo-700 dark:from-indigo-600 dark:to-indigo-800 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:from-indigo-600 hover:to-indigo-800 dark:hover:from-indigo-700 dark:hover:to-indigo-900 transition-all">
                   Sign In
                 </Button>
-              </SignInButton>
+              </Link>
 
-              <SignUpButton mode="modal">
+              <Link href="/sign-up">
                 <Button className="bg-white border border-gray-300 dark:bg-gray-700 dark:border-gray-600 text-black dark:text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-slate-50 dark:hover:bg-gray-600 transition-all">
                   Sign Up
                 </Button>
-              </SignUpButton>
+              </Link>
             </div>
-          </SignedOut>
-
-          <SignedIn>
-            <UserButton afterSignOutUrl="/" />
-          </SignedIn>
+          )}
         </div>
       </div>
     </nav>
