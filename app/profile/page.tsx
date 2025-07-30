@@ -1,6 +1,6 @@
 "use client";
 
-// import { useUser, useClerk } from "@clerk/nextjs"; // Temporarily disabled for testing
+import { useUser, useClerk } from "@clerk/nextjs"; // Re-enabled
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -115,20 +115,17 @@ const weeklyActivity = [
 ];
 
 export default function ProfilePage() {
-  // const { user } = useUser(); // Temporarily disabled for testing
-  // const { openUserProfile } = useClerk(); // Temporarily disabled for testing
-
-  // Mock user data for testing
-  const user = {
-    imageUrl: "https://ui-avatars.com/api/?name=Test+User&background=random",
-    fullName: "Test User",
-    username: "testuser"
-  };
+  const { user } = useUser(); // Re-enabled
+  const { openUserProfile } = useClerk(); // Re-enabled
 
   const handleEditProfile = () => {
-    // openUserProfile(); // Temporarily disabled for testing
-    alert("Edit profile functionality temporarily disabled for testing");
+    openUserProfile(); // Re-enabled
   };
+
+  // Loading state
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen mx-auto p-8 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
@@ -140,15 +137,15 @@ export default function ProfilePage() {
             <div className="flex flex-col items-center">
               <div className="relative">
                 <Image
-                  src={user?.imageUrl || "User"}
-                  alt={user?.fullName || "User"} 
+                  src={user?.imageUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.username || user?.firstName || 'User')}&background=random`}
+                  alt={user?.fullName || user?.username || "User"} 
                   width={100}
                   height={100}
                   className="rounded-full"
                 />
               </div>
-              <h2 className="mt-4 text-xl font-semibold">{user?.fullName || "User"}</h2>
-              <p className="text-sm text-muted-foreground dark:text-gray-400">{user?.username || "User"}</p>
+              <h2 className="mt-4 text-xl font-semibold">{user?.fullName || user?.username || "User"}</h2>
+              <p className="text-sm text-muted-foreground dark:text-gray-400">{user?.username || user?.firstName || "User"}</p>
 
               <Button 
               onClick={handleEditProfile}

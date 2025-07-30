@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
-// import { useUser } from "@clerk/nextjs"; // Temporarily disabled for testing
+import { useUser } from "@clerk/nextjs"; // Re-enabled
 import {
   Card,
   CardFooter,
@@ -185,14 +185,12 @@ function CoursesContent() {
 }
 
 export default function CoursesPage() {
-  // const { user } = useUser(); // Temporarily disabled for testing
+  const { user } = useUser(); // Re-enabled
   
-  // Mock user data for testing
-  const user = {
-    imageUrl: "https://ui-avatars.com/api/?name=Test+User&background=random",
-    fullName: "Test User",
-    firstName: "Test"
-  };
+  // Loading state
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen pl-10">
@@ -227,15 +225,15 @@ export default function CoursesPage() {
               <div className="flex flex-col items-center justify-center gap-4 mb-2">
                 <Link href="/profile">
                   <Image
-                    src={user?.imageUrl || "User"}
-                    alt={user?.fullName || "User"}
+                    src={user?.imageUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.username || user?.firstName || 'User')}&background=random`}
+                    alt={user?.fullName || user?.username || "User"}
                     width={100}
                     height={100}
                     className="rounded-full"
                   />
                 </Link>
                 <div className="text-center">
-                  <h2 className="font-semibold text-lg">Welcome Back {user?.firstName || "User"}!</h2>
+                  <h2 className="font-semibold text-lg">Welcome Back {user?.username || user?.firstName || "User"}!</h2>
                   <p className="text-sm text-muted-foreground">
                     Continue Your Journey
                   </p>
