@@ -251,9 +251,9 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ i
                     50% OFF
                   </div>
                 </div>
-
+:
                 <div className="space-y-4">         
-                  <Link href="https://buy.stripe.com/test_6oE289fUcgBe5r2fYY" passHref>
+                  <Link href="https://buy.stripe.com/test_bJe8wO7dl9qT7j96NQ3sI00"passHref>
                     <Button className="w-full bg-gradient-to-r from-indigo-500 to-indigo-700 hover:shadow-md" size="lg">
                       Buy
                     </Button>
