@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useUser } from "@clerk/nextjs"; // Re-enabled
+import { UrlPreview } from "@/components/UrlPreview";
 import {
   Card,
   CardFooter,
@@ -141,14 +142,10 @@ function CoursesContent() {
             className="transition-transform hover:scale-[1.02]"
           >
             <Card className="overflow-hidden dark:bg-gray-700 shadow-lg rounded-lg">
-              <div className="aspect-video relative">
-                <Image
-                  src={course.thumbnail}
-                  alt={course.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
+              <UrlPreview 
+                url={course.thumbnail}
+                className="aspect-video"
+              />
               <CardHeader className="space-y-2">
                 <div className="inline-flex px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
                   {course.category}
