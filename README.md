@@ -60,12 +60,12 @@ This application contains hardcoded API keys in the main files as requested:
 
 ### Google Gemini AI (components/Chatbot.tsx)
 ```javascript
-const GEMINI_API_KEY = "AIzaSyCRasSBtZuUo2D_js8XUZL9p2oIgwzdKLM";
+const GEMINI_API_KEY = "<YOUR_KEY>";
 ```
 
 ### MongoDB Connection (lib/mongodb.ts)
 ```javascript
-const MONGODB_URI = "mongodb+srv://subhrasrimani2002:u3A9LipaovgJrxNJ@cluster.hr3bm.mongodb.net/...";
+const MONGODB_URI = "your serve url";
 ```
 
 ### Environment Variables (.env)
@@ -172,4 +172,5 @@ For deployment issues or questions, refer to:
 ---
 
 **Eduminati** - Access quality education anywhere, anytime. 🎓
+
 
