@@ -2,6 +2,10 @@
 
 Eduminati is a modern online learning platform built with Next.js, React, and MongoDB. It provides users with access to quality educational content, interactive courses, instructor profiles, and an AI-powered chatbot for instant help.
 
+## 🌿 Development Branch
+
+A `develop` branch has been created for ongoing development work. This branch serves as the main development branch where feature branches can be merged before being integrated into the main branch.
+
 ## ✨ Features
 
 - **User Authentication**: Secure login and registration using Clerk.
